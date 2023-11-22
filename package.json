@@ -1,0 +1,23 @@
+{
+  "name": "apartments-scrapper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kunstefix/ts-node-script.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kunstefix/ts-node-script/issues"
+  },
+  "homepage": "https://github.com/kunstefix/ts-node-script#readme",
+  "dependencies": {
+    "puppeteer": "^21.5.2",
+    "ts-node": "^10.9.1"
+  }
+}
