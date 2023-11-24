@@ -1,0 +1,44 @@
+@layer utilities {
+  .grid-main {
+    @apply grid grid-cols-6 gap-x-4 lg:grid-cols-12 lg:gap-x-8;
+  }
+
+  .grid-main-spread {
+    @apply grid grid-cols-1 gap-y-6 lg:grid-cols-2 lg:gap-x-16;
+  }
+
+  .scrollbar-hover {
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0);
+    }
+
+    &:hover {
+      &::-webkit-scrollbar-thumb {
+        background-color: theme(colors.neutral.150);
+      }
+    }
+  }
+
+  .list-inc {
+    counter-reset: counter;
+    padding-left: 40px;
+  }
+  .list-inc li {
+    counter-increment: counter;
+    @apply relative mb-6 last:mb-0;
+  }
+  .list-inc li:before {
+    content: counters(counter, '.') ' ';
+    /* Whatever custom styles you want here */
+    @apply absolute -left-10 top-0 flex h-6 w-6 flex-col justify-center rounded-full bg-black text-center text-sm font-medium text-white;
+  }
+
+  .prose {
+    h1 + p,
+    h2 + p {
+      @apply mt-0;
+    }
+  }
+}

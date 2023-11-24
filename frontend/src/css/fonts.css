@@ -1,0 +1,25 @@
+@layer base {
+  @font-face {
+    font-family: 'Denim';
+    font-weight: normal;
+    font-display: block;
+    src: local('Denim-Regular'), url(@/assets/fonts/Denim-Regular.woff2) format('woff2'),
+      url(@/assets/fonts/Denim-Regular.woff) format('woff');
+  }
+
+  @font-face {
+    font-family: 'Denim';
+    font-weight: 500;
+    font-display: block;
+    src: local('Denim-Medium'), url(@/assets/fonts/Denim-Medium.woff2) format('woff2'),
+      url(@/assets/fonts/Denim-Medium.woff) format('woff');
+  }
+
+  @font-face {
+    font-family: 'Denim';
+    font-weight: 600;
+    font-display: block;
+    src: local('Denim-SemiBold'), url(@/assets/fonts/Denim-SemiBold.woff2) format('woff2'),
+      url(@/assets/fonts/Denim-SemiBold.woff) format('woff');
+  }
+}

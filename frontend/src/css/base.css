@@ -1,0 +1,26 @@
+@layer base {
+  :root {
+    --crynow-scrollbar-size: 8px;
+  }
+
+  body {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+
+    ::-webkit-scrollbar {
+      height: var(--crynow-scrollbar-size);
+      width: var(--crynow-scrollbar-size);
+    }
+
+    ::-webkit-scrollbar-track {
+      background: none;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: theme(colors.neutral.150);
+      border-radius: var(--crynow-scrollbar-size);
+    }
+  }
+}

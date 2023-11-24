@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.eslintrc.cjs
+postcss.config.js
+tailwind.config.js
+storybook-static/
+!.storybook
