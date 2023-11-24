@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/kunstefix/ts-node-script#readme",
   "dependencies": {
+    "dotenv": "^16.3.1",
+    "pg": "^8.11.3",
+    "pg-promise": "^11.5.4",
     "puppeteer": "^21.5.2",
     "ts-node": "^10.9.1"
   }
