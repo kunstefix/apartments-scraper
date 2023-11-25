@@ -5,8 +5,8 @@ interface MyData {
 }
 
 function App() {
-  const url = "http://localhost:3030/all-listings"
-  const { data, loading, error } = useFetch<MyData>(
+  const url = "http://localhost:3000/all-listings"
+  const { data } = useFetch<MyData>(
     url
   );
   
