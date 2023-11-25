@@ -9,14 +9,16 @@ interface FetchState<T> {
 
 
 function useFetchProperties<T>(page: number, perPage: number): FetchState<T> {
-    const url = `http://localhost:3000/paginated-listings?page=${page}&perPage=${perPage}`
+    const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
+    const URL = `${BASE_API_URL}/paginated-listings?page=${page}&perPage=${perPage}`
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | null | unknown>(null);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(url);
+                const response = await fetch(URL);
 
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
@@ -33,7 +35,7 @@ function useFetchProperties<T>(page: number, perPage: number): FetchState<T> {
         };
 
         fetchData();
-    }, [url]);
+    }, [URL]);
 
     return { data, loading, error };
 }

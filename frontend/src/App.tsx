@@ -16,7 +16,7 @@ interface PropertyListing {
 }
 
 function App() {
-  const PAGE_SIZE = 20;
+  const PAGE_SIZE = 16;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { data } = useFetchProperties<PropertyListing>(
     currentPage,
