@@ -1,5 +1,15 @@
+import useFetch from "./hooks/useFetch";
+
+interface MyData {
+  // Define your data structure here
+}
 
 function App() {
+  const url = "http://localhost:3030/all-listings"
+  const { data, loading, error } = useFetch<MyData>(
+    url
+  );
+  
   const elements = [1,2,3 ,4, 5, 6, 7, 8, 9, 10]
   return (
     <div className="min-h-screen bg-neutral-50">
@@ -10,6 +20,7 @@ function App() {
         </div>
       </header>
 
+      {JSON.stringify(data, null, 2)}
       {/* Body Content */}
       <div className="container px-4 mt-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
