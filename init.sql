@@ -1,8 +1,8 @@
 -- Create a new PostgreSQL user
-CREATE USER myuser WITH PASSWORD 'mypassword';
+-- CREATE USER myuser WITH PASSWORD 'mypassword';
 
 -- Create a new database and assign ownership to the user
-CREATE DATABASE mydatabase WITH OWNER = myuser;
+-- CREATE DATABASE mydatabase WITH OWNER = myuser;
 
 CREATE TABLE property_listings (
     id SERIAL PRIMARY KEY,
