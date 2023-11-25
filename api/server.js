@@ -3,13 +3,13 @@ const { Pool } = require('pg');
 const cors = require('cors');
 
 const app = express();
-const port = 3030;
+const port = 3000;
 
 // PostgreSQL database configuration
 const pool = new Pool({
-    host: 'localhost',
+    host: 'db',
     port: 5432,
-    database: 'mydatabase',
+    database: 'mydb',
     user: 'myuser',
     password: 'mypassword',
 });

@@ -11,10 +11,22 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
-  scraper-app:
+  scraper:
     build:
       context: ./scraper
     depends_on:
       - db
     volumes:
       - ./scraper:/app
+  
+  api:
+    build:
+      context: ./api
+    depends_on:
+      - scraper
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api:/app
+
+  
