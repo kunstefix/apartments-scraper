@@ -14,17 +14,6 @@ RUN apk add --no-cache \
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Add user so we don't need --no-sandbox.
-RUN addgroup -S pptruser && adduser -S -G pptruser pptruser \
-    && mkdir -p /home/pptruser/Downloads /app \
-    && chown -R pptruser:pptruser /home/pptruser \
-    && chown -R pptruser:pptruser /app
-
-# Run everything after as non-privileged user.
-USER pptruser
-
-WORKDIR /app
-
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
@@ -35,4 +24,5 @@ RUN npm install
 COPY . .
 
 # Define the command to start the application
+
 CMD ["npm", "run", "start"]

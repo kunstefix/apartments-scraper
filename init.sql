@@ -8,7 +8,7 @@ CREATE TABLE property_listings (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     locality VARCHAR(255) NOT NULL,
-    images JSONB
+    media VARCHAR(255) 
 );
 
 -- Grant necessary privileges to the user (e.g., superuser, if needed)
