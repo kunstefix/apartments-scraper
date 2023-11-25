@@ -1,5 +1,6 @@
 const express = require('express');
 const { Pool } = require('pg');
+const cors = require('cors');
 
 const app = express();
 const port = 3030;
@@ -12,6 +13,9 @@ const pool = new Pool({
     user: 'myuser',
     password: 'mypassword',
 });
+
+// Enable CORS for all routes, you can customize the options as needed
+app.use(cors());
 
 // Define a route to retrieve data from the database
 app.get('/all-listings', async (req, res) => {
