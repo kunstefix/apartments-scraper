@@ -11,7 +11,7 @@ const DATABASE_CONFIG = {
   password: 'mypassword',
 };
 
-const MAX_PROPERTY_COUNT = 100;
+const MAX_PROPERTY_COUNT = 500;
 const BASE_URL = 'https://www.sreality.cz/en/search/for-sale/apartments';
 
 main();
