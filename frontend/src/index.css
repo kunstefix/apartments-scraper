@@ -5,7 +5,6 @@
 @import '@/css/base.css';
 @import '@/css/fonts.css';
 @import '@/css/utilities.css';
-@import 'overlayscrollbars/overlayscrollbars.css';
 
 html {
   overscroll-behavior: none;

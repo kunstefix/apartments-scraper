@@ -1,1 +1,1 @@
-# cryptonow-platform
+# Appartments app 

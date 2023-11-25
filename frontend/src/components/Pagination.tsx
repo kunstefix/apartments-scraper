@@ -40,7 +40,7 @@ const Pagination = ({
   const isFirstPageSelected = currentPage === 1
   const isLastPageSelected = currentPage === lastPage
   return (
-    <nav className={`flex w-fit align-middle ${className}`}>
+    <nav className={`flex w-fit align-middle font-semibold	 ${className}`}>
       <button
         disabled={isFirstPageSelected}
         onClick={onPrevious}
@@ -48,7 +48,7 @@ const Pagination = ({
         className={!isFirstPageSelected ? `transition-opacity duration-200 hover:opacity-60` : ''}
       >
         <div className={`mr-6 flex ${isFirstPageSelected ? 'text-neutral-500' : 'text-black'}`}>
-         {"<"}
+          {"<"}
           <span className="hidden sm:inline ml-1">Previous</span>
         </div>
       </button>
@@ -66,9 +66,8 @@ const Pagination = ({
             <button
               key={pageNumber}
               disabled={pageNumber === currentPage}
-              className={`h-7 w-7 rounded-full ${
-                pageNumber === currentPage ? 'bg-neutral-50' : 'transition-colors duration-200 hover:bg-neutral-100'
-              } `}
+              className={`h-7 w-7 rounded-full ${pageNumber === currentPage ? 'bg-neutral-50' : 'transition-colors duration-200 hover:bg-neutral-100'
+                } `}
               onClick={() => onPageChange(pageNumber as number)}
             >
               {pageNumber}
