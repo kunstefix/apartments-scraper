@@ -17,20 +17,6 @@ const pool = new Pool({
 // Enable CORS for all routes, you can customize the options as needed
 app.use(cors());
 
-// Define a route to retrieve data from the database
-app.get('/all-listings', async (req, res) => {
-  try {
-    const client = await pool.connect();
-    const result = await client.query('SELECT * FROM property_listings');
-    const items = result.rows;
-    client.release();
-    res.json(items);
-  } catch (error) {
-    console.error('Error querying the database', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
@@ -43,16 +29,23 @@ app.get('/paginated-listings', async (req, res) => {
     const offset = (page - 1) * perPage;
 
     const client = await pool.connect();
+    
+    // Query to get paginated results
     const result = await client.query(
       'SELECT * FROM property_listings OFFSET $1 LIMIT $2',
       [offset, perPage]
     );
+    
+    // Query to count all entries in the table
+    const countResult = await client.query('SELECT COUNT(*) FROM property_listings');
+    const countAll = parseInt(countResult.rows[0].count);
 
     const items = result.rows;
     client.release();
     
     res.json({
       items,
+      allItemsCount: countAll,
       currentPage: page,
       itemsPerPage: perPage,
     });
