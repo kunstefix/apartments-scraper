@@ -14,9 +14,9 @@ const db = pgp('postgres://username:password@host:port/database');
   // Configure PostgreSQL database connection
   const pgp = pgPromise();
   const db = pgp({
-    host: 'localhost',
+    host: 'db',
     port: 5432,
-    database: 'mydatabase',
+    database: 'mydb',
     user: 'myuser',
     password: 'mypassword',
   });
