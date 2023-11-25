@@ -10,3 +10,11 @@ services:
       - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  scraper-app:
+    build:
+      context: ./scraper
+    depends_on:
+      - db
+    volumes:
+      - ./scraper:/app

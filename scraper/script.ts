@@ -1,12 +1,16 @@
+#!/usr/bin/env ts-node
+
 import puppeteer from 'puppeteer';
 import pgPromise from 'pg-promise';
 
-const pgp = pgPromise({/* Initialization Options */ });
-
-const db = pgp('postgres://username:password@host:port/database');
 
 (async () => {
-  const browser = await puppeteer.launch();
+  console.log("VERSION: ", process.version)
+
+  const browser = await puppeteer.launch({
+    headless: "new",
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
   const page = await browser.newPage();
   const baseUrl = 'https://www.sreality.cz/en/search/for-sale/apartments';
   await page.goto(baseUrl);
