@@ -6,14 +6,16 @@ interface FetchState<T> {
     error: Error | null | unknown;
 }
 
-function useFetch<T>(url: string): FetchState<T> {
+
+
+function useFetchProperties<T>(page: number, perPage: number): FetchState<T> {
+    const url = `http://localhost:3000/paginated-listings?page=${page}&perPage=${perPage}`
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | null | unknown>(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log("test")
                 const response = await fetch(url);
 
                 if (!response.ok) {
@@ -36,4 +38,4 @@ function useFetch<T>(url: string): FetchState<T> {
     return { data, loading, error };
 }
 
-export default useFetch;
+export default useFetchProperties;

@@ -1,5 +1,6 @@
+import { useState } from "react";
 import Pagination from "./components/Pagination";
-import useFetch from "./hooks/useFetch";
+import useFetchProperties from "./hooks/useFetchProperties";
 
 interface PropertyListing {
   items: {
@@ -14,11 +15,14 @@ interface PropertyListing {
 }
 
 function App() {
-  const url = "http://localhost:3000/paginated-listings?page=1&perPage=10"
-  const { data } = useFetch<PropertyListing>(
-    url
-  );
+ 
 
+  const PAGE_SIZE = 10;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const { data } = useFetchProperties<PropertyListing>(
+    currentPage,
+    PAGE_SIZE
+  );
   
   
   return (
@@ -27,31 +31,31 @@ function App() {
       <header className="sticky top-0 bg-white shadow-md">
         <div className="container mx-4 py-4">
           <h1 className="text-2xl font-semibold">Apartments</h1>
-        </div>
+        </div>  
       </header>
 
       {/* Body Content */}
       <div className="container px-4 mt-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {/* Grid Elements */}
-          {data?.items.map( ({id, title, media, locality}) => (
-            <div key={id} className="bg-white rounded-lg shadow-md p-4 hover:bg-purple-100">
+            {data?.items.map( ({id, title, media, locality}) => (
+            <div key={id} className="bg-white rounded-lg shadow-md p-4 hover:bg-purple-100 transition-colors duration-200">
               <img
                 src={media}
                 alt="Element 1"
                 className="w-full h-auto"
               />
               <p className="mt-2 text-lg font-semibold">{title}</p>
-              <p className="mt-2 text-lg font-semibold">{locality}</p>
+              <p className="mt-2 text-md font-semibold">{locality}</p>
             </div>))}
 
 
           {/* Repeat similar code for other grid elements */}
         </div>
       </div>
-      <footer className="sticky bottom-0 bg-white shadow-md">
+      <footer className="sticky bottom-0 bg-white shadow-md mt-2">
         <div className="container mx-4 py-4 flex justify-center">
-          <Pagination totalCount={100}  currentPage={1} pageSize={10} onPageChange={() => {}} />
+          <Pagination totalCount={data?.allItemsCount || 100}  currentPage={currentPage} pageSize={PAGE_SIZE} onPageChange={setCurrentPage} />
         </div>
       </footer>
     </div>
