@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import pgPromise from 'pg-promise';
 
-const pgp = pgPromise({/* Initialization Options */});
+const pgp = pgPromise({/* Initialization Options */ });
 
 const db = pgp('postgres://username:password@host:port/database');
 
@@ -37,6 +37,8 @@ const db = pgp('postgres://username:password@host:port/database');
       });
       property.images = images;
 
+      
+      clearObject(property);
       // Insert scraped data into the PostgreSQL database
       try {
         await db.none('INSERT INTO property_listings(title, locality, images) VALUES($1, $2, $3)', [
@@ -73,15 +75,17 @@ const db = pgp('postgres://username:password@host:port/database');
   console.log('done');
 
   // Clear all data of unnecessary characters
-  allPropertyData.forEach((obj) => {
+  //allPropertyData.forEach(clearObject);
+
+  function clearObject(obj) {
     for (const prop in obj) {
       if (obj.hasOwnProperty(prop)) {
         obj[prop] = obj[prop].replace ? obj[prop].replace(/[\n\t]/g, '') : obj[prop]; // Remove newline and space characters
       }
     }
-  });
+  }
 
-//   console.log('allPropertyData', allPropertyData);
+  //   console.log('allPropertyData', allPropertyData);
 
   await browser.close();
 })();
