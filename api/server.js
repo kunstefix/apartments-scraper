@@ -1,26 +1,26 @@
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
 
 // PostgreSQL database configuration
 const pool = new Pool({
-    host: 'db',
-    port: 5432,
-    database: 'mydb',
-    user: 'myuser',
-    password: 'mypassword',
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+  database: process.env.PGDATABASE,
 });
 
-// Enable CORS for all routes, you can customize the options as needed
+// Enable CORS 
 app.use(cors());
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
-
 
 app.get('/paginated-listings', async (req, res) => {
   try {
