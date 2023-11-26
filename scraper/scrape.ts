@@ -2,34 +2,32 @@
 
 import puppeteer from 'puppeteer';
 import pgPromise from 'pg-promise';
+import dotenv from 'dotenv';
 
+dotenv.config();
+
+const BASE_URL = process.env.SOURCE_URL;
 const DATABASE_CONFIG = {
-  host: 'db',
-  port: 5432,
-  database: 'mydb',
-  user: 'myuser',
-  password: 'mypassword',
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+  database: process.env.PGDATABASE,
 };
-
 const MAX_PROPERTY_COUNT = 500;
-const BASE_URL = 'https://www.sreality.cz/en/search/for-sale/apartments';
 
 main();
 
 async function main() {
   const browser = await launchBrowser();
   const page = await createPage(browser);
-
   await gotoPage(page, BASE_URL);
-
   const db = await setupDatabaseConnection();
-
   let allPropertyData = [];
 
   while (allPropertyData.length < MAX_PROPERTY_COUNT) {
     const currentPagePropertyData = await scrapePropertyListings(page, db);
     allPropertyData = allPropertyData.concat(currentPagePropertyData);
-    console.log('allPropertyData', allPropertyData.length);
 
     await page.waitForSelector('a.paging-next', { timeout: 10000 }); // Adjust the timeout as needed
     const nextPageButton = await page.$('a.paging-next');
@@ -41,7 +39,7 @@ async function main() {
     await nextPageButton.click();
   }
 
-  console.log('scanned', allPropertyData.length);
+  console.log('Scraped listings:', allPropertyData.length);
   console.log('Done scraping.');
 
   await browser.close();
@@ -64,7 +62,7 @@ async function gotoPage(page, url) {
 
 async function setupDatabaseConnection() {
   const pgp = pgPromise();
-  const db = pgp(DATABASE_CONFIG);
+  const db = pgp(DATABASE_CONFIG as any);
   return db;
 }
 
@@ -76,10 +74,8 @@ async function scrapePropertyListings(page, db) {
     const property = {} as any;
     property.title = await propertyElement.$eval('.title', (el) => el.textContent);
     property.locality = await propertyElement.$eval('.locality', (el) => el.textContent);
-
     const imgElements = await propertyElement.$$('img');
     property.image = await imgElements[0].getProperty('src').then((src) => src.jsonValue());
-
     clearObject(property);
 
     try {
