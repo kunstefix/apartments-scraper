@@ -9,4 +9,4 @@ This is a simple demo app that consists of:
 
 ### Running the app
 
-Just run `docker-compose up` and visit [127.0.0.1:8080/](http://127.0.0.1:8080/)
+Just run `docker-compose up` and visit [127.0.0.1:8080](http://127.0.0.1:8080/)
