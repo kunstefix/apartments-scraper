@@ -22,12 +22,12 @@ services:
   api:
     build:
       context: ./api
-    depends_on:
-      - scraper
     ports:
       - "3000:3000"
     volumes:
       - ./api:/app
+      - /app/node_modules
+      
 
   frontend:
     build:

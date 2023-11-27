@@ -5,10 +5,13 @@ FROM node:16
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
-COPY package.json ./
+COPY package*.json ./
+
+# Install TypeScript and ts-node globally
+RUN npm i -g typescript ts-node
 
 # Install dependencies
-RUN npm install
+RUN npm i
 
 # Copy the rest of the Express API server code to the container
 COPY . .

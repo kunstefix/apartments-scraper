@@ -22,7 +22,6 @@
     "pg-promise": "^11.5.4",
     "puppeteer": "13.5.0"
   },
-  
   "devDependencies": {
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2"
