@@ -44,7 +44,7 @@ function App() {
         </div>
       </div>
       <footer className="fixed bottom-0 bg-white shadow-md mt-2 w-full border-black border-t-2 " >
-        <div className="container mx-4 py-4 flex justify-center">
+        <div className="mx-4 py-4 flex justify-center">
           <Pagination
             totalCount={data?.allItemsCount || 100}
             currentPage={currentPage}
